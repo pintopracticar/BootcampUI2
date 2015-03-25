@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+    <head>
+        <title>UI Bootcamp 2</title>
+        <meta charset="utf-8" />
+        <script type="text/javascript">
+            
+            // movie object constructor
+            function movie(){
+                this.get = function(attr){
+                    if (attr === "title"){
+                        console.log(this.titleValue);
+                    }
+                }
+                this.play = function(){
+                    console.log("Playing "+this.titleValue+"...");
+                }
+                this.stop = function(){
+                    MovieObserver.stopped();
+                }
+                this.set = function(attr,value){
+                    if (attr === "title"){
+                        this.titleValue = value;
+                    }
+                } 
+            }
+            
+            // Movie object module
+            var Movie = {
+                play: function(){
+                    console.log("Playing "+this.titleValue+"...");
+                },
+                stop: function(){
+                    MovieObserver.stopped();
+                },
+                set: function(attr,value){
+                    // Si el usuario eligio agregar el campo title, entonces se pasa el valor, caso contrario no hace nada
+                    if (attr === "title"){
+                        this.titleValue = value;
+                    }
+                },
+                get: function(attr){
+                    
+                }
+            }
+            
+            // Funcionabilidad para descargar la pelicula
+            Movie.__proto__.DownloadableMovie = function(){
+                console.log("Download movie method");
+            }
+            
+            // Funcionabilidades sociales
+            Movie.__proto__.Social = {
+                share: function (friendName){
+                    console.log(Movie.titleValue+" shared with "+friendName+"...");
+                },
+                like: function (){
+                    console.log(Movie.titleValue+" liked...");
+                }
+            }
+            
+            // Array que tiene a todos los actores
+            Movie.__proto__.Actors = []
+            
+            
+            // Agrego actores
+            Movie.__proto__.addActors = function(role,name){
+                var agregar = {role: role,name: name};
+                this.Actors.push(agregar);
+            }
+            
+            // Funcionabilidades extras
+            var MovieObserver = {
+                playing: function(){
+                    console.log("Playing ...")
+                },
+                stopped: function(){
+                    console.log("Stopped ...")
+                }
+            }
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>
